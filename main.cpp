@@ -18,7 +18,7 @@ int main()
     ManejadordeBloques * mbloques= new ManejadordeBloques(archivo);
     ManejadroTablas * mtablas=new ManejadroTablas(archivo,mbloques->masterBlock);
 
-    for(int c=0;c<1000;c++)
+    /*for(int c=0;c<1000;c++)
     {
         char * nombre= new char[20];
         nombre[0]='t';

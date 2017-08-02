@@ -1,22 +1,19 @@
 #include "campo.h"
+#include <stdio.h>
+#include <string.h>
+#include <iostream>
+using namespace std;
 
-campo::campo(char name[20],char tipo[10],int columna,char nombTabla[20])
+campo::campo(char name[20],int t)
 {
-    for(int c=0;c<20;c++)
-    {
-        nombre[c]=name[c];
-    }
+    strncpy(nombre,name,20);
+    tipo=t;
+    if(t==0)
+        longitud=20;
+    else
+        longitud=4;
+    sig=0;
 
-    for(int c=0;c<20;c++)
-    {
-        tipo[c]=tipo[c];
-    }
-
-    for(int c=0;c<20;c++)
-    {
-        nombreTabla[c]=nombTabla[c];
-    }
-    columna=columna;
 }
 
 

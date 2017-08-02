@@ -2,6 +2,14 @@
 #include <stdio.h>
 #include <string.h>
 #include <iostream>
+#include "listcampos.h"
+#include "bloquecampo.h"
+#include "datafile.h"
+#include "bloqueregistro.h"
+#include "registro.h"
+#include "campodatos.h"
+#include "listregistros.h"
+
 using namespace std;
 
 tabla::tabla(char name[20],int i,int pBCampos,int actualBCampos,int pBDatos,int actualBDatos,int nB)
@@ -14,6 +22,8 @@ tabla::tabla(char name[20],int i,int pBCampos,int actualBCampos,int pBDatos,int 
     actualBloqueDatos=actualBDatos;
     nBloque=nB;
     sig=0;
+    campos= new ListCampos();
+    registros= new ListRegistros();
 }
 
 
@@ -55,6 +65,64 @@ void tabla::charToTabla(char * data)
     pos+=4;
     memcpy(&nBloque,&data[pos],4);
     pos+=4;
+}
+
+void tabla::cargarCampos(DataFile * archivo)
+{
+    int actual=primerBloqueCampos;
+    while(actual!=-1)
+    {
+        BloqueCampo *bc= new BloqueCampo(archivo,actual);
+        bc->cargar();
+        for(int c=0;c<bc->cantidad;c++)
+        {
+            campos->add(bc->campos->get(c));
+        }
+        actual=bc->siguiente;
+    }
+}
+
+void tabla::cargarRegistros(DataFile * archivo)
+{
+    int actual=primerBloqueCampos;
+    while(actual!=-1)
+    {
+        BloqueRegistro *br= new BloqueRegistro(archivo,actual);
+        br->cargar();
+        int longitudReg=this->getLongitudRegistros();
+        for(int c=0;c< br->cantidad;c++)
+        {
+            registros->add(interpretarRegistro("",longitudReg));
+        }
+        actual=br->siguiente;
+    }
+}
+
+Registro * tabla::interpretarRegistro(char * data,int longitud)
+{
+    int pos=0;
+    Registro * reg= new Registro();
+    for(int c=0;c<campos->cantidad;c++)
+    {
+        CampoDatos * campDatos= new CampoDatos();
+        campo * defCampo= campos->get(c);
+        campDatos->defCampos=defCampo;
+        campDatos->valor=&data[pos];
+        pos+=defCampo->longitud;
+        reg->campoDatos->add(campDatos);
+    }
+    return reg;
+}
+
+int tabla::getLongitudRegistros()
+{
+    int sum=0;
+    for(int c=0;c<campos->cantidad;c++)
+    {
+        sum+=campos->get(c)->longitud;
+    }
+    return sum;
+
 }
 
 void tabla::toString()

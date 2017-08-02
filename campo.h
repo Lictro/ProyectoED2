@@ -5,12 +5,11 @@
 class campo
 {
     public:
-        campo(char name[20],char tipo[10],int columna,char nombTabla[20]);
+        campo(char name[20],int t);
         char nombre[20];
-        char tipo[10];
-        int columna;
-        char nombreTabla[20];
-
+        int tipo;
+        int longitud;
+        campo * sig;
 };
 
 #endif // CAMPO_H

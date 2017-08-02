@@ -1,35 +1,32 @@
-#include "bloquecampo.h"
+#include "bloqueregistro.h"
 #include "datafile.h"
 #include <stdio.h>
 #include <string.h>
 #include <iostream>
-#include "listcampos.h"
-
-BloqueCampo::BloqueCampo(DataFile * file,int numBloque)
+BloqueRegistro::BloqueRegistro(DataFile * archivo,int nBloque)
 {
-    nBloque=numBloque;
+    archivo=archivo;
+    nBloque=nBloque;
     tamBloque=512;
     siguiente=-1;
-    archivo=file;
     cantidad=0;
-    campos=new ListCampos();
 }
 
-void BloqueCampo::escribir()
+void BloqueRegistro::escribir()
 {
     char * data= this->toChar();
     int pos= nBloque * tamBloque+20;
     archivo->escribir(data,pos,tamBloque);
 }
 
-void BloqueCampo::cargar()
+void BloqueRegistro::cargar()
 {
     int pos= nBloque * tamBloque+20;
     char * data=archivo->leer(pos,tamBloque);
     charToBloque(data);
 }
 
-void BloqueCampo::charToBloque(char * data)
+void BloqueRegistro::charToBloque(char * data)
 {
     int pos=0;
     memcpy(&nBloque,&data[pos],4);
@@ -40,7 +37,7 @@ void BloqueCampo::charToBloque(char * data)
     pos+=4;
 }
 
-char * BloqueCampo::toChar()
+char * BloqueRegistro::toChar()
 {
     char * data= new char[tamBloque];
     int pos=0;
@@ -52,7 +49,5 @@ char * BloqueCampo::toChar()
     pos+=4;
     return data;
 }
-
-
 
 

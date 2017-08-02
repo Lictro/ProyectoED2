@@ -1,7 +1,9 @@
 #ifndef TABLA_H
 #define TABLA_H
-
-
+#include "listcampos.h"
+#include "datafile.h"
+#include  "registro.h"
+#include "listregistros.h"
 class tabla
 {
     public:
@@ -13,10 +15,17 @@ class tabla
         int primerBloqueDatos;
         int actualBloqueDatos;
         int nBloque;
+        ListCampos * campos;
+        ListRegistros * registros;
         char * toChar();
         void charToTabla(char * data);
         tabla * sig;
         void toString();
+        void cargarCampos(DataFile * archivo);
+        void cargarRegistros(DataFile *archivo);
+        Registro * interpretarRegistro(char * data,int longitud);
+        int getLongitudRegistros();
+
 
     protected:
 
