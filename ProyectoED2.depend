@@ -1,0 +1,126 @@
+# depslib dependency file v1.0
+1501623160 source:c:\users\david\documents\clases\ii año\ii periodo\estructura de datos\proyectoed2\bloque.cpp
+	"bloque.h"
+	"datafile.h"
+	<stdio.h>
+	<string.h>
+	<iostream>
+
+1501623160 c:\users\david\documents\clases\ii año\ii periodo\estructura de datos\proyectoed2\bloque.h
+	"datafile.h"
+
+1501364424 c:\users\david\documents\clases\ii año\ii periodo\estructura de datos\proyectoed2\datafile.h
+	<stdio.h>
+
+1501183042 source:c:\users\david\documents\clases\ii año\ii periodo\estructura de datos\proyectoed2\bloquecampo.cpp
+	"bloquecampo.h"
+	"datafile.h"
+	<stdio.h>
+	<string.h>
+	<iostream>
+
+1501182978 c:\users\david\documents\clases\ii año\ii periodo\estructura de datos\proyectoed2\bloquecampo.h
+	"datafile.h"
+
+1501642887 source:c:\users\david\documents\clases\ii año\ii periodo\estructura de datos\proyectoed2\bloquetabla.cpp
+	"bloquetabla.h"
+	"listtabla.h"
+	<stdio.h>
+	<string.h>
+	<iostream>
+	"tabla.h"
+	"datafile.h"
+	"datafile.h"
+	<iostream>
+
+1501636435 c:\users\david\documents\clases\ii año\ii periodo\estructura de datos\proyectoed2\bloquetabla.h
+	"listtabla.h"
+	"datafile.h"
+	<vector>
+
+1501160536 c:\users\david\documents\clases\ii año\ii periodo\estructura de datos\proyectoed2\listtabla.h
+	"tabla.h"
+
+1501643274 c:\users\david\documents\clases\ii año\ii periodo\estructura de datos\proyectoed2\tabla.h
+
+1501182983 source:c:\users\david\documents\clases\ii año\ii periodo\estructura de datos\proyectoed2\campo.cpp
+	"campo.h"
+
+1501182824 c:\users\david\documents\clases\ii año\ii periodo\estructura de datos\proyectoed2\campo.h
+
+1501460985 source:c:\users\david\documents\clases\ii año\ii periodo\estructura de datos\proyectoed2\datafile.cpp
+	"datafile.h"
+	<io.h>
+	<stdlib.h>
+	<cstring>
+	<stdio.h>
+
+1501214682 source:c:\users\david\documents\clases\ii año\ii periodo\estructura de datos\proyectoed2\listbloquetablas.cpp
+	"listbloquetablas.h"
+	"bloquetabla.h"
+
+1501214657 c:\users\david\documents\clases\ii año\ii periodo\estructura de datos\proyectoed2\listbloquetablas.h
+	"bloquetabla.h"
+
+1501636777 source:c:\users\david\documents\clases\ii año\ii periodo\estructura de datos\proyectoed2\listtabla.cpp
+	"listtabla.h"
+	"tabla.h"
+	<iostream>
+
+1501643456 source:c:\users\david\documents\clases\ii año\ii periodo\estructura de datos\proyectoed2\main.cpp
+	<iostream>
+	"datafile.h"
+	"bloque.h"
+	"manejadrotablas.h"
+	"manejadordebloques.h"
+	"bloquecampo.h"
+	"bloquetabla.h"
+	<stdio.h>
+	"masterblock.h"
+	"tabla.h"
+
+1501635137 c:\users\david\documents\clases\ii año\ii periodo\estructura de datos\proyectoed2\manejadrotablas.h
+	"listbloquetablas.h"
+	"tabla.h"
+	"datafile.h"
+	"manejadordebloques.h"
+	"masterblock.h"
+
+1501175683 c:\users\david\documents\clases\ii año\ii periodo\estructura de datos\proyectoed2\manejadordebloques.h
+	"datafile.h"
+	"bloque.h"
+	"masterblock.h"
+
+1501439050 c:\users\david\documents\clases\ii año\ii periodo\estructura de datos\proyectoed2\masterblock.h
+	"datafile.h"
+
+1501636704 source:c:\users\david\documents\clases\ii año\ii periodo\estructura de datos\proyectoed2\manejadordebloques.cpp
+	"manejadordebloques.h"
+	"bloque.h"
+	"datafile.h"
+	<iostream>
+
+1501643039 source:c:\users\david\documents\clases\ii año\ii periodo\estructura de datos\proyectoed2\manejadrotablas.cpp
+	"manejadrotablas.h"
+	"listbloquetablas.h"
+	"listtabla.h"
+	"bloquetabla.h"
+	"tabla.h"
+	"manejadordebloques.h"
+	"bloque.h"
+	<iostream>
+	"masterblock.h"
+
+1501211073 source:c:\users\david\documents\clases\ii año\ii periodo\estructura de datos\proyectoed2\masterblock.cpp
+	"masterblock.h"
+	<stdio.h>
+	<string.h>
+	<iostream>
+	"datafile.h"
+
+1501643456 source:c:\users\david\documents\clases\ii año\ii periodo\estructura de datos\proyectoed2\tabla.cpp
+	"tabla.h"
+	<stdio.h>
+	<string.h>
+	<iostream>
+
