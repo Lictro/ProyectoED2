@@ -107,7 +107,7 @@ Registro * tabla::interpretarRegistro(char * data,int longitud)
         CampoDatos * campDatos= new CampoDatos();
         campo * defCampo= campos->get(c);
         campDatos->defCampos=defCampo;
-        campDatos->valor=&data[pos];
+        campDatos->data=&data[pos];
         pos+=defCampo->longitud;
         reg->campoDatos->add(campDatos);
     }
