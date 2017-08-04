@@ -12,6 +12,10 @@ class CampoDatos
         CampoDatos * sig;
         int getIntValue();
         char * getCharValue();
+        void printValor();
+        void toString();
+        char * toChar();
+        void initFromChar(char * data);
 
     private:
 };

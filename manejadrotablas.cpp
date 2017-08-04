@@ -7,6 +7,7 @@
 #include "bloque.h"
 #include <iostream>
 #include "masterblock.h"
+#include "registro.h"
 using namespace std;
 
 
@@ -20,7 +21,7 @@ ManejadroTablas::ManejadroTablas(DataFile *a,MasterBlock * masterBlock)
 
 void ManejadroTablas::crearTabla(char name[20],int id,ManejadordeBloques * manejador)
 {
-    tabla * t = new tabla(name,id,0,0,0,0,0);
+    tabla * t = new tabla(name,id,-1,-1,-1,-1,0,archivo);
     if(manejador->masterBlock->primerBloqueTabla==-1)
     {
         BloqueTabla * bt= new BloqueTabla(archivo,0);
@@ -81,7 +82,7 @@ void ManejadroTablas::listarTablas()
     }
 }
 
-tabla * ManejadroTablas::buscarTabla(char *name)
+tabla * ManejadroTablas::buscarTabla(int id)
 {
     for(int x=0;x<listaBT->cantidad;x++)
     {
@@ -89,9 +90,20 @@ tabla * ManejadroTablas::buscarTabla(char *name)
         for(int c=0;c<bt->tablas->cantidad;c++)
         {
             tabla * t=bt->tablas->get(c);
-            if(t->nombre==name)
+            if(t->id==id)
                 return t;
         }
+    }
+    return 0;
+}
+
+BloqueTabla * ManejadroTablas::buscarBloqueTabla(int n)
+{
+    for(int c=0;c<listaBT->cantidad;c++)
+    {
+        BloqueTabla * bt= listaBT->get(c);
+        if(bt->nBloque==n)
+            return bt;
     }
     return 0;
 }
@@ -108,5 +120,35 @@ void ManejadroTablas::cargarBT()
         bloque= new BloqueTabla(archivo,actual);
         bloque->cargar();
         listaBT->addBT(bloque);
+    }
+}
+
+void ManejadroTablas::crearCampo(int id,char nombreCampo[20],int tipo,ManejadordeBloques * manejador)
+{
+    tabla * t = buscarTabla(id);
+    if(t!=0)
+    {
+        t->crearCampo(manejador,nombreCampo,tipo);
+        BloqueTabla * bt = buscarBloqueTabla(t->nBloque);
+        bt->escribir();
+    }
+    else
+    {
+        cout<<"Nombre Incorrecto"<<endl;
+    }
+}
+
+void ManejadroTablas::addRegistro(int id,ManejadordeBloques * manejador,Registro * r)
+{
+    tabla * t = buscarTabla(id);
+    if(t!=0)
+    {
+        t->crearRegistro(manejador,r);
+        BloqueTabla * bt = buscarBloqueTabla(t->nBloque);
+        bt->escribir();
+    }
+    else
+    {
+        cout<<"Nombre Incorrecto"<<endl;
     }
 }

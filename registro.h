@@ -5,9 +5,12 @@
 class Registro
 {
     public:
-        Registro();
+        Registro(int longitud);
         ListCampoDatos * campoDatos;
+        int longitudRegistro;
         Registro * sig;
+        char * toChar();
+        void initFromChar(char * data);
 
     private:
 };

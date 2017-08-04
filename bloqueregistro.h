@@ -1,6 +1,7 @@
 #ifndef BLOQUEREGISTRO_H
 #define BLOQUEREGISTRO_H
 #include "datafile.h"
+#include "listregistros.h"
 
 class BloqueRegistro
 {
@@ -11,10 +12,12 @@ class BloqueRegistro
         int cantidad;
         int tamBloque;
         int siguiente;
+        int longitudRegistro;
         void escribir();
-        void cargar();
+        void cargar(int longitud);
         char * toChar();
-        void charToBloque(char * data);
+        void charToBloque(char * data,int longitud);
+        ListRegistros * registros;
 };
 
 #endif // BLOQUEREGISTRO_H

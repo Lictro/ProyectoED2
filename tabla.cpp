@@ -9,11 +9,15 @@
 #include "registro.h"
 #include "campodatos.h"
 #include "listregistros.h"
-
+#include "manejadordebloques.h"
+#include "listbloquetablas.h"
+#include "bloquecampo.h"
+#include "registro.h"
 using namespace std;
 
-tabla::tabla(char name[20],int i,int pBCampos,int actualBCampos,int pBDatos,int actualBDatos,int nB)
+tabla::tabla(char name[20],int i,int pBCampos,int actualBCampos,int pBDatos,int actualBDatos,int nB,DataFile *a)
 {
+    archivo=a;
     strncpy(nombre,name,20);
     id=i;
     primerBloqueCampos=pBCampos;
@@ -67,7 +71,97 @@ void tabla::charToTabla(char * data)
     pos+=4;
 }
 
-void tabla::cargarCampos(DataFile * archivo)
+void tabla::crearRegistro(ManejadordeBloques * mbloques,Registro *r)
+{
+    if(primerBloqueDatos==-1)
+    {
+        Bloque *b = mbloques->asignarNueboBloque();
+        BloqueRegistro * br= new BloqueRegistro(archivo,b->nBloque);
+        br->registros->add(r);
+        br->escribir();
+        registros->add(r);
+        primerBloqueDatos=b->nBloque;
+        actualBloqueDatos=b->nBloque;
+        return;
+    }
+    int actual=primerBloqueDatos;
+    while(actual!=-1)
+    {
+        BloqueRegistro *br = new BloqueRegistro(archivo,actual);
+        br->cargar(r->longitudRegistro);
+        int maximo=(512-16)/r->longitudRegistro;
+        if(br->cantidad<maximo)
+        {
+            br->registros->add(r);
+            br->cantidad++;
+            br->escribir();
+            registros->add(r);
+            return;
+            //Tenqo que guardar la tabla o por lo menos el bloqueTabla como tal
+        }
+
+    }
+    Bloque *b=mbloques->asignarNueboBloque();
+    BloqueRegistro * br = new BloqueRegistro(archivo,b->nBloque);
+    BloqueRegistro * tmp = new BloqueRegistro(archivo,actualBloqueCampos);
+    tmp->cargar(r->longitudRegistro);
+    tmp->siguiente=br->nBloque;
+    tmp->escribir();
+    br->registros->add(r);
+    br->cantidad++;
+    br->escribir();
+    actualBloqueDatos=br->nBloque;
+}
+
+void tabla::crearCampo(ManejadordeBloques * mbloques,char name[20],int tipo)
+{
+    campo * c= new campo(name,tipo);
+    if(primerBloqueCampos==-1)
+    {
+        Bloque * b =mbloques->asignarNueboBloque();
+        BloqueCampo * bc= new BloqueCampo(archivo,b->nBloque);
+        bc->campos->add(c);
+        bc->cantidad++;
+        bc->escribir();
+        campos->add(c);
+        primerBloqueCampos=bc->nBloque;
+        actualBloqueCampos=bc->nBloque;
+
+
+        //Tengo que guardar la tabla en el archivo o por lo menos el bloqueTabla
+        return;
+    }
+    int actual=primerBloqueCampos;
+    while(actual!=-1)
+    {
+        BloqueCampo *bc = new BloqueCampo(archivo,actual);
+        bc->cargar();
+        int maximo=17;
+        if(bc->cantidad<maximo)
+        {
+            bc->campos->add(c);
+            bc->cantidad++;
+            bc->escribir();
+            campos->add(c);
+            return;
+            //Tenqo que guardar la tabla o por lo menos el bloqueTabla como tal
+        }
+
+    }
+    Bloque *b=mbloques->asignarNueboBloque();
+    BloqueCampo * bc = new BloqueCampo(archivo,b->nBloque);
+    BloqueCampo * tmp = new BloqueCampo(archivo,actualBloqueCampos);
+    tmp->cargar();
+    tmp->siguiente=bc->nBloque;
+    tmp->escribir();
+    bc->campos->add(c);
+    bc->cantidad++;
+    bc->escribir();
+    actualBloqueCampos=bc->nBloque;
+    //Tengo que guardar la tabla o el Bloque Tabla
+}
+
+void tabla::cargarCampos()
 {
     int actual=primerBloqueCampos;
     while(actual!=-1)
@@ -82,17 +176,18 @@ void tabla::cargarCampos(DataFile * archivo)
     }
 }
 
-void tabla::cargarRegistros(DataFile * archivo)
+void tabla::cargarRegistros()
 {
-    int actual=primerBloqueCampos;
+    int actual=primerBloqueDatos;
     while(actual!=-1)
     {
         BloqueRegistro *br= new BloqueRegistro(archivo,actual);
-        br->cargar();
         int longitudReg=this->getLongitudRegistros();
+        br->cargar(longitudReg);
+
         for(int c=0;c< br->cantidad;c++)
         {
-            registros->add(interpretarRegistro("",longitudReg));
+            registros->add(interpretarRegistro(br->registros->get(c)->toChar(),longitudReg));
         }
         actual=br->siguiente;
     }
@@ -101,13 +196,14 @@ void tabla::cargarRegistros(DataFile * archivo)
 Registro * tabla::interpretarRegistro(char * data,int longitud)
 {
     int pos=0;
-    Registro * reg= new Registro();
+    Registro * reg= new Registro(longitud);
     for(int c=0;c<campos->cantidad;c++)
     {
         CampoDatos * campDatos= new CampoDatos();
         campo * defCampo= campos->get(c);
         campDatos->defCampos=defCampo;
-        campDatos->data=&data[pos];
+        campDatos->valor=&data[pos];
+        memcpy(campDatos->valor,&data[pos],defCampo->longitud);
         pos+=defCampo->longitud;
         reg->campoDatos->add(campDatos);
     }

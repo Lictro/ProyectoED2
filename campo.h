@@ -10,6 +10,9 @@ class campo
         int tipo;
         int longitud;
         campo * sig;
+        char * toChar();
+        void initFromChar(char * data);
+        //Crear tochar y init en campoDatos y en registro
 };
 
 #endif // CAMPO_H

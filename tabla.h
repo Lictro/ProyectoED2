@@ -4,10 +4,12 @@
 #include "datafile.h"
 #include  "registro.h"
 #include "listregistros.h"
+#include "manejadordebloques.h"
 class tabla
 {
     public:
-        tabla(char name[20],int i,int pBCampos,int actualBCampos,int pBDatos,int actualBDatos,int nB);
+        tabla(char name[20],int i,int pBCampos,int actualBCampos,int pBDatos,int actualBDatos,int nB,DataFile * a);
+        DataFile * archivo;
         char nombre[20];
         int id;
         int primerBloqueCampos;
@@ -21,8 +23,10 @@ class tabla
         void charToTabla(char * data);
         tabla * sig;
         void toString();
-        void cargarCampos(DataFile * archivo);
-        void cargarRegistros(DataFile *archivo);
+        void cargarCampos();
+        void cargarRegistros();
+        void crearCampo(ManejadordeBloques * mbloques, char name[20],int tipo);
+        void crearRegistro(ManejadordeBloques * mbloques,Registro *r);
         Registro * interpretarRegistro(char * data,int longitud);
         int getLongitudRegistros();
 

@@ -38,6 +38,15 @@ void BloqueCampo::charToBloque(char * data)
     pos+=4;
     memcpy(&siguiente,&data[pos],4);
     pos+=4;
+    memcpy(&cantidad,&data[pos],4);
+    pos+=4;
+    for(int x=0;x<cantidad;x++)
+    {
+        campo *c= new campo("",0);
+        c->initFromChar(&data[pos]);
+        campos->add(c);
+        pos+=28;
+    }
 }
 
 char * BloqueCampo::toChar()
@@ -50,6 +59,14 @@ char * BloqueCampo::toChar()
     pos+=4;
     memcpy(&data[pos],&siguiente,4);
     pos+=4;
+    memcpy(&data[pos],&cantidad,4);
+    pos+=4;
+    for(int c=0;c<cantidad;c++)
+    {
+        char * entry_data= campos->get(c)->toChar();
+        memcpy(&data[pos],entry_data,28);
+        pos+=28;
+    }
     return data;
 }
 
