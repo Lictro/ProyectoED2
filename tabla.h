@@ -29,6 +29,7 @@ class tabla
         void crearRegistro(ManejadordeBloques * mbloques,Registro *r);
         Registro * interpretarRegistro(char * data,int longitud);
         int getLongitudRegistros();
+        void printTabla();
 
 
     protected:

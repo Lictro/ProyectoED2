@@ -10,6 +10,11 @@
 #include "tabla.h"
 #include "registro.h"
 #include "campodatos.h"
+#include "bloque.h"
+#include "bloquecampo.h"
+#include "bloqueregistro.h"
+#include "campo.h"
+#include "campodatos.h"
 using namespace std;
 
 int main()
@@ -19,6 +24,24 @@ int main()
     archivo->abrir();
     ManejadordeBloques * mbloques= new ManejadordeBloques(archivo);
     ManejadroTablas * mtablas=new ManejadroTablas(archivo,mbloques->masterBlock);
+
+    /*BloqueCampo * bc = new BloqueCampo(archivo,0);
+    char * nombreC= new char[20];
+    nombreC[0]='N';
+    nombreC[1]='o';
+    nombreC[2]='m';
+    nombreC[3]='b';
+    nombreC[4]='r';
+    nombreC[5]='e';
+    campo * nombre= new campo(nombreC,0);
+    bc->campos->add(nombre);
+    nombreC[6]='s';
+    bc->campos->add(nombre);
+    bc->cantidad++;
+    bc->cantidad++;
+    bc->escribir();*/
+    //BloqueRegistro * br= new BloqueRegistro(archivo,1);
+
     char * buscar= new char[20];
     buscar[0]='t';
     buscar[1]='a';
@@ -31,7 +54,6 @@ int main()
     nombre[2]='b';
     nombre[3]='l';
     nombre[4]='a';
-    cout<<nombre<<endl;
     mtablas->crearTabla(nombre,1020,mbloques);
     //mtablas->buscarTabla(nombre);
     //mtablas->listarTablas();
@@ -55,14 +77,16 @@ int main()
     datos[1]='a';
     datos[2]='v';
     datos[3]='i';
-    datos[3]='d';
+    datos[4]='d';
     CampoDatos * datosN=new CampoDatos(datos,mtablas->buscarTabla(1020)->campos->get(0));
     char * edad= new char[20];
-    datos[0]='1';
-    datos[1]='9';
+    sprintf(edad, "%d", 19);
     CampoDatos * datosE=new CampoDatos(edad,mtablas->buscarTabla(1020)->campos->get(1));
     Registro * r= new Registro(mtablas->buscarTabla(1020)->getLongitudRegistros());
+    r->campoDatos->add(datosN);
+    r->campoDatos->add(datosE);
     mtablas->addRegistro(1020,mbloques,r);
+    mtablas->buscarTabla(1020)->printTabla();
     /*for(int c=0;c<1000;c++)
     {
         char * nombre= new char[20];
@@ -81,7 +105,7 @@ int main()
 
         mtablas->crearTabla(nombre,c,mbloques);
     }//*/
-    mtablas->listarTablas();
+    //mtablas->listarTablas();
     archivo->cerrar();
 
     /*

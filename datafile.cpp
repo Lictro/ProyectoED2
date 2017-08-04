@@ -3,7 +3,8 @@
 #include <stdlib.h>
 #include <cstring>
 #include <stdio.h>
-
+#include <iostream>
+using namespace std;
 
 DataFile::DataFile(char * p)
 {

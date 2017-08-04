@@ -27,7 +27,8 @@ void ManejadordeBloques::formatearDataFile()
 
 Bloque * ManejadordeBloques::asignarNueboBloque()
 {
-    Bloque * bloque = new Bloque(archivo,masterBlock->sigBloqueDisponible++,masterBlock->tamanoBloque,-1);
+    Bloque * bloque = new Bloque(archivo,masterBlock->sigBloqueDisponible,masterBlock->tamanoBloque,-1);
+    masterBlock->sigBloqueDisponible++;
     bloque->escribir();
     masterBlock->guardar();
     return bloque;

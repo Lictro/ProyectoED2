@@ -4,9 +4,10 @@
 #include <string.h>
 #include <iostream>
 #include "listregistros.h"
+using namespace std;
 BloqueRegistro::BloqueRegistro(DataFile * archivo,int nBloque)
 {
-    archivo=archivo;
+    this->archivo=archivo;
     nBloque=nBloque;
     tamBloque=512;
     siguiente=-1;

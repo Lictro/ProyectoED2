@@ -43,7 +43,7 @@
 1501160536 c:\users\david\documents\clases\ii año\ii periodo\estructura de datos\proyectoed2\listtabla.h
 	"tabla.h"
 
-1501819327 c:\users\david\documents\clases\ii año\ii periodo\estructura de datos\proyectoed2\tabla.h
+1501851346 c:\users\david\documents\clases\ii año\ii periodo\estructura de datos\proyectoed2\tabla.h
 	"listcampos.h"
 	"datafile.h"
 	"registro.h"
@@ -58,12 +58,13 @@
 
 1501810468 c:\users\david\documents\clases\ii año\ii periodo\estructura de datos\proyectoed2\campo.h
 
-1501460985 source:c:\users\david\documents\clases\ii año\ii periodo\estructura de datos\proyectoed2\datafile.cpp
+1501825722 source:c:\users\david\documents\clases\ii año\ii periodo\estructura de datos\proyectoed2\datafile.cpp
 	"datafile.h"
 	<io.h>
 	<stdlib.h>
 	<cstring>
 	<stdio.h>
+	<iostream>
 
 1501214682 source:c:\users\david\documents\clases\ii año\ii periodo\estructura de datos\proyectoed2\listbloquetablas.cpp
 	"listbloquetablas.h"
@@ -77,7 +78,7 @@
 	"tabla.h"
 	<iostream>
 
-1501822862 source:c:\users\david\documents\clases\ii año\ii periodo\estructura de datos\proyectoed2\main.cpp
+1501853942 source:c:\users\david\documents\clases\ii año\ii periodo\estructura de datos\proyectoed2\main.cpp
 	<iostream>
 	"datafile.h"
 	"bloque.h"
@@ -89,6 +90,11 @@
 	"masterblock.h"
 	"tabla.h"
 	"registro.h"
+	"campodatos.h"
+	"bloque.h"
+	"bloquecampo.h"
+	"bloqueregistro.h"
+	"campo.h"
 	"campodatos.h"
 
 1501822862 c:\users\david\documents\clases\ii año\ii periodo\estructura de datos\proyectoed2\manejadrotablas.h
@@ -108,7 +114,7 @@
 1501439050 c:\users\david\documents\clases\ii año\ii periodo\estructura de datos\proyectoed2\masterblock.h
 	"datafile.h"
 
-1501636704 source:c:\users\david\documents\clases\ii año\ii periodo\estructura de datos\proyectoed2\manejadordebloques.cpp
+1501824112 source:c:\users\david\documents\clases\ii año\ii periodo\estructura de datos\proyectoed2\manejadordebloques.cpp
 	"manejadordebloques.h"
 	"bloque.h"
 	"datafile.h"
@@ -133,7 +139,7 @@
 	<iostream>
 	"datafile.h"
 
-1501819445 source:c:\users\david\documents\clases\ii año\ii periodo\estructura de datos\proyectoed2\tabla.cpp
+1501853942 source:c:\users\david\documents\clases\ii año\ii periodo\estructura de datos\proyectoed2\tabla.cpp
 	"tabla.h"
 	<stdio.h>
 	<string.h>
@@ -156,7 +162,7 @@
 1501645853 source:c:\users\david\documents\clases\ii año\ii periodo\estructura de datos\proyectoed2\listcampos.cpp
 	"listcampos.h"
 
-1501817613 source:c:\users\david\documents\clases\ii año\ii periodo\estructura de datos\proyectoed2\bloqueregistro.cpp
+1501853690 source:c:\users\david\documents\clases\ii año\ii periodo\estructura de datos\proyectoed2\bloqueregistro.cpp
 	"bloqueregistro.h"
 	"datafile.h"
 	<stdio.h>
@@ -168,14 +174,14 @@
 	"datafile.h"
 	"listregistros.h"
 
-1501813561 source:c:\users\david\documents\clases\ii año\ii periodo\estructura de datos\proyectoed2\campodatos.cpp
+1501853488 source:c:\users\david\documents\clases\ii año\ii periodo\estructura de datos\proyectoed2\campodatos.cpp
 	"campodatos.h"
 	"campo.h"
 	<iostream>
 	<stdio.h>
 	<string.h>
 
-1501810505 c:\users\david\documents\clases\ii año\ii periodo\estructura de datos\proyectoed2\campodatos.h
+1501853428 c:\users\david\documents\clases\ii año\ii periodo\estructura de datos\proyectoed2\campodatos.h
 	"campo.h"
 
 1501648946 source:c:\users\david\documents\clases\ii año\ii periodo\estructura de datos\proyectoed2\listcampodatos.cpp

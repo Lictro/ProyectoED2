@@ -4,16 +4,16 @@
 #include <stdio.h>
 #include <string.h>
 using namespace std;
-CampoDatos::CampoDatos(char * val,campo *dCampos)
+CampoDatos::CampoDatos(char val[20],campo *dCampos)
 {
-    valor=val;
+    strncpy(valor,val,20);
     defCampos=dCampos,
     sig=0;
 }
 
 CampoDatos::CampoDatos()
 {
-    valor=0;
+    valor[0]=' ';
     defCampos=0;
     sig=0;
 }
@@ -46,16 +46,16 @@ char * CampoDatos::toChar()
 {
     int pos=0;
     char * data= new char[20];
-    memcpy(&data[pos],valor,4);
-    pos+=4;
+    memcpy(&data[pos],valor,20);
+    pos+=20;
     return data;
 }
 
 void CampoDatos::initFromChar(char * data)
 {
     int pos=0;
-    memcpy(valor,&data[pos],4);
-    pos+=4;
+    memcpy(valor,&data[pos],20);
+    pos+=20;
 }
 
 

@@ -5,9 +5,9 @@
 class CampoDatos
 {
     public:
-        CampoDatos(char * val,campo * dCampos);
+        CampoDatos(char val[],campo * dCampos);
         CampoDatos();
-        char * valor;
+        char valor[20];
         campo * defCampos;
         CampoDatos * sig;
         int getIntValue();

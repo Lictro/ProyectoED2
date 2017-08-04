@@ -78,6 +78,7 @@ void tabla::crearRegistro(ManejadordeBloques * mbloques,Registro *r)
         Bloque *b = mbloques->asignarNueboBloque();
         BloqueRegistro * br= new BloqueRegistro(archivo,b->nBloque);
         br->registros->add(r);
+        br->cantidad++;
         br->escribir();
         registros->add(r);
         primerBloqueDatos=b->nBloque;
@@ -103,7 +104,7 @@ void tabla::crearRegistro(ManejadordeBloques * mbloques,Registro *r)
     }
     Bloque *b=mbloques->asignarNueboBloque();
     BloqueRegistro * br = new BloqueRegistro(archivo,b->nBloque);
-    BloqueRegistro * tmp = new BloqueRegistro(archivo,actualBloqueCampos);
+    BloqueRegistro * tmp = new BloqueRegistro(archivo,actualBloqueDatos);
     tmp->cargar(r->longitudRegistro);
     tmp->siguiente=br->nBloque;
     tmp->escribir();
@@ -202,8 +203,9 @@ Registro * tabla::interpretarRegistro(char * data,int longitud)
         CampoDatos * campDatos= new CampoDatos();
         campo * defCampo= campos->get(c);
         campDatos->defCampos=defCampo;
-        campDatos->valor=&data[pos];
-        memcpy(campDatos->valor,&data[pos],defCampo->longitud);
+        memcpy(campDatos->valor,&data[pos],20);
+        //campDatos->valor=&data[pos];
+        //memcpy(campDatos->valor,&data[pos],defCampo->longitud);
         pos+=defCampo->longitud;
         reg->campoDatos->add(campDatos);
     }
@@ -224,5 +226,27 @@ int tabla::getLongitudRegistros()
 void tabla::toString()
 {
     cout<<"Nombre: "<<nombre<<"  ID: "<<id<<"  PrimerBloqueCampo: "<<primerBloqueCampos<<"  ActualBloqueCampo: "<<actualBloqueCampos<<"  PrimerBloqueDatos: "<<primerBloqueDatos<<"  ActualBloqueDatos: "<<actualBloqueDatos<<"  Numero de Bloque: "<<nBloque<<endl<<endl;
+}
+
+void tabla::printTabla()
+{
+    cout<<"Nomnbre de la Tabla: "<<nombre<<endl;
+    for(int c=0;c<campos->cantidad;c++)
+    {
+        cout<<campos->get(c)->nombre<<"    ";
+    }
+    cout<<endl;
+    for(int c=0;c<registros->cantidad;c++)
+    {
+        Registro * r= registros->get(c);
+        for(int x=0;x<r->campoDatos->cantidad;x++)
+        {
+            CampoDatos * camDatos=r->campoDatos->get(x);
+            //camDatos->printValor();
+            cout<<camDatos->valor;
+            cout<<"    ";
+        }
+        cout<<endl;
+    }
 }
 
