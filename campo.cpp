@@ -29,7 +29,7 @@ char * campo::toChar()
 void campo::initFromChar(char * data)
 {
     int pos=0;
-    memcpy(nombre,&data[pos],4);
+    memcpy(nombre,&data[pos],20);
     pos+=20;
     memcpy(&tipo,&data[pos],4);
     pos+=4;

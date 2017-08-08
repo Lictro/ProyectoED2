@@ -28,7 +28,7 @@ void Registro::initFromChar(char * data)
     int pos=0;
     for(int c=0;c<longitudRegistro;c+=20)
     {
-        CampoDatos * cam= new CampoDatos();
+        CampoDatos * cam= new CampoDatos("",0);
         cam->initFromChar(&data[pos]);
         campoDatos->add(cam);
         pos+=20;

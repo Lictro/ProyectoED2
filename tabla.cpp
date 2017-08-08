@@ -78,7 +78,7 @@ void tabla::crearRegistro(ManejadordeBloques * mbloques,Registro *r)
         Bloque *b = mbloques->asignarNueboBloque();
         BloqueRegistro * br= new BloqueRegistro(archivo,b->nBloque);
         br->registros->add(r);
-        br->cantidad++;
+        br->actualizarCantidad();
         br->escribir();
         registros->add(r);
         primerBloqueDatos=b->nBloque;
@@ -90,18 +90,21 @@ void tabla::crearRegistro(ManejadordeBloques * mbloques,Registro *r)
     {
         BloqueRegistro *br = new BloqueRegistro(archivo,actual);
         br->cargar(r->longitudRegistro);
-        int maximo=(512-16)/r->longitudRegistro;
-        if(br->cantidad<maximo)
+        int maximo=496/r->longitudRegistro;
+        if(br->registros->cantidad < 2)
         {
+
             br->registros->add(r);
-            br->cantidad++;
+            br->actualizarCantidad();
             br->escribir();
             registros->add(r);
             return;
             //Tenqo que guardar la tabla o por lo menos el bloqueTabla como tal
         }
+        actual=br->siguiente;
 
     }
+
     Bloque *b=mbloques->asignarNueboBloque();
     BloqueRegistro * br = new BloqueRegistro(archivo,b->nBloque);
     BloqueRegistro * tmp = new BloqueRegistro(archivo,actualBloqueDatos);
@@ -109,9 +112,10 @@ void tabla::crearRegistro(ManejadordeBloques * mbloques,Registro *r)
     tmp->siguiente=br->nBloque;
     tmp->escribir();
     br->registros->add(r);
-    br->cantidad++;
+    registros->add(r);
+    br->actualizarCantidad();
     br->escribir();
-    actualBloqueDatos=br->nBloque;
+    actualBloqueDatos=b->nBloque;
 }
 
 void tabla::crearCampo(ManejadordeBloques * mbloques,char name[20],int tipo)
@@ -147,6 +151,7 @@ void tabla::crearCampo(ManejadordeBloques * mbloques,char name[20],int tipo)
             return;
             //Tenqo que guardar la tabla o por lo menos el bloqueTabla como tal
         }
+        actual=bc->siguiente;
 
     }
     Bloque *b=mbloques->asignarNueboBloque();
@@ -230,10 +235,10 @@ void tabla::toString()
 
 void tabla::printTabla()
 {
-    cout<<"Nomnbre de la Tabla: "<<nombre<<endl;
+    cout<<"Nombre de la Tabla: "<<nombre<<endl;
     for(int c=0;c<campos->cantidad;c++)
     {
-        cout<<campos->get(c)->nombre<<"    ";
+        cout<<" "<<campos->get(c)->nombre<<"    ";
     }
     cout<<endl;
     for(int c=0;c<registros->cantidad;c++)
@@ -243,8 +248,17 @@ void tabla::printTabla()
         {
             CampoDatos * camDatos=r->campoDatos->get(x);
             //camDatos->printValor();
-            cout<<camDatos->valor;
-            cout<<"    ";
+            if(camDatos->defCampos->tipo==1)
+            {
+                cout<<"   ";
+            }
+            cout<<" "<<camDatos->valor;
+            cout<<"     ";
+             if(camDatos->defCampos->tipo==1)
+            {
+                cout<<"   ";
+            }
+
         }
         cout<<endl;
     }

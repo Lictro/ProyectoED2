@@ -11,8 +11,13 @@ BloqueRegistro::BloqueRegistro(DataFile * archivo,int nBloque)
     nBloque=nBloque;
     tamBloque=512;
     siguiente=-1;
-    cantidad=0;
+    this->cantidad=0;
     registros= new ListRegistros();
+}
+
+void BloqueRegistro::actualizarCantidad()
+{
+    this->cantidad++;
 }
 
 void BloqueRegistro::escribir()

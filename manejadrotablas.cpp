@@ -14,9 +14,24 @@ using namespace std;
 ManejadroTablas::ManejadroTablas(DataFile *a,MasterBlock * masterBlock)
 {
     archivo=a;
+
     listaBT= new ListBloqueTablas();
     if(masterBlock->primerBloqueTabla!=-1)
+    {
         cargarBT();
+        for(int x=0;x<listaBT->cantidad;x++)
+        {
+            BloqueTabla * bt=listaBT->get(x);
+            for(int c=0;c<bt->cantidad;c++)
+            {
+                tabla * t=bt->tablas->get(c);
+                t->cargarCampos();
+                t->cargarRegistros();
+            }
+        }
+
+    }
+
 }
 
 void ManejadroTablas::crearTabla(char name[20],int id,ManejadordeBloques * manejador)

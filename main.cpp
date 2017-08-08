@@ -42,7 +42,7 @@ int main()
     bc->escribir();*/
     //BloqueRegistro * br= new BloqueRegistro(archivo,1);
 
-    char * buscar= new char[20];
+    /*char * buscar= new char[20];
     buscar[0]='t';
     buscar[1]='a';
     buscar[2]='b';
@@ -86,8 +86,8 @@ int main()
     r->campoDatos->add(datosN);
     r->campoDatos->add(datosE);
     mtablas->addRegistro(1020,mbloques,r);
-    mtablas->buscarTabla(1020)->printTabla();
-    /*for(int c=0;c<1000;c++)
+    mtablas->buscarTabla(1020)->printTabla();//*/
+    for(int c=0;c<1000;c++)
     {
         char * nombre= new char[20];
         nombre[0]='t';
@@ -104,8 +104,71 @@ int main()
         }
 
         mtablas->crearTabla(nombre,c,mbloques);
-    }//*/
-    //mtablas->listarTablas();
+        int tipo=0;
+        for(int i=0;i<10;i++)
+        {
+            char * nombreC= new char[20];
+            nombreC[0]='C';
+            nombreC[1]='a';
+            nombreC[2]='m';
+            nombreC[3]='p';
+            nombreC[4]='o';
+            nombreC[5]='_';
+            char cadena1[10];
+            sprintf(cadena1, "%d", i);
+            for(int x=0;cadena1[x]!='\0';x++)
+            {
+                nombreC[x+6]=cadena1[x];
+            }
+            if(i==4)
+                tipo=1;
+            if(i==9)
+                tipo=1;
+            mtablas->crearCampo(c,nombreC,tipo,mbloques);
+            tipo=0;
+        }
+    }
+
+        for(int c=0;c<1000;c++)
+        {
+
+            Registro * r= new Registro(mtablas->buscarTabla(c)->getLongitudRegistros());
+            for(int i=0;i<10;i++)
+            {
+                char * datos= new char[20];
+                datos[0]='d';
+                datos[1]='a';
+                datos[2]='t';
+                datos[3]='o';
+                datos[4]='_';
+
+                char cadena2[10];
+                sprintf(cadena2, "%d", c);
+                for(int x=0;cadena2[x]!='\0';x++)
+                {
+                    datos[x+5]=cadena2[x];
+                }
+                if(i==4 || i==9)
+                {
+                    datos=new char[10];
+                    sprintf(datos, "%d", i);
+                }
+                CampoDatos * datosN=new CampoDatos(datos,mtablas->buscarTabla(c)->campos->get(i));
+                r->campoDatos->add(datosN);
+
+            }
+            mtablas->addRegistro(c,mbloques,r);
+        }
+
+
+
+
+
+
+   //mtablas->buscarTabla(10)->toString();
+    //*/
+    mtablas->listarTablas();
+    //mtablas->buscarTabla(0)->printTabla();
     archivo->cerrar();
 
     /*

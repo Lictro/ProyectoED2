@@ -15,6 +15,7 @@ class BloqueRegistro
         int longitudRegistro;
         void escribir();
         void cargar(int longitud);
+        void actualizarCantidad();
         char * toChar();
         void charToBloque(char * data,int longitud);
         ListRegistros * registros;
